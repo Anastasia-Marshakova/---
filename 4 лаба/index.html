@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List - Матрица Эйзенхауэра</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ToDo List - Матрица Эйзенхауэра</h1>
+            <p>Управляйте своими задачами эффективно</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalTasks">0</div>
+                    <div class="stat-label">Всего</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Выполнено</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="pendingTasks">0</div>
+                    <div class="stat-label">В ожидании</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="urgentImportantTasks">0</div>
+                    <div class="stat-label">Срочно и важно</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="list">Список</button>
+            <button class="view-btn" data-view="matrix">Матрица (Блоки)</button>
+        </div>
+
+        <div class="add-task-form">
+            <div class="form-group" id="nameGroup">
+                <label for="taskName">Название задачи *</label>
+                <input type="text" id="taskName" placeholder="Например: Сделать ДЗ">
+                <div class="error-message">Пожалуйста, введите название задачи</div>
+            </div>
+            <div class="form-group">
+                <label for="taskDescription">Описание (необязательно)</label>
+                <textarea id="taskDescription" placeholder="Добавьте описание задачи..."></textarea>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label for="taskDate">Дата (необязательно)</label>
+                    <input type="date" id="taskDate">
+                </div>
+                <div class="form-group">
+                    <label for="taskTime">Время (необязательно)</label>
+                    <input type="time" id="taskTime">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Важность (1-5) *</label>
+                    <div class="rating-group" id="importanceRating">
+                        <button type="button" class="rating-btn" data-value="1">1</button>
+                        <button type="button" class="rating-btn" data-value="2">2</button>
+                        <button type="button" class="rating-btn" data-value="3">3</button>
+                        <button type="button" class="rating-btn" data-value="4">4</button>
+                        <button type="button" class="rating-btn selected" data-value="5">5</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Срочность (1-5) *</label>
+                    <div class="rating-group" id="urgencyRating">
+                        <button type="button" class="rating-btn" data-value="1">1</button>
+                        <button type="button" class="rating-btn" data-value="2">2</button>
+                        <button type="button" class="rating-btn" data-value="3">3</button>
+                        <button type="button" class="rating-btn selected" data-value="4">4</button>
+                        <button type="button" class="rating-btn" data-value="5">5</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Статус</label>
+                    <select id="taskStatus">
+                        <option value="pending">В ожидании</option>
+                        <option value="in-progress">В работе</option>
+                        <option value="completed">Выполнено</option>
+                    </select>
+                </div>
+            </div>
+            <button class="add-btn" id="addTaskBtn">Добавить задачу</button>
+        </div>
+
+        <div class="filter-sort">
+            <select id="filterStatus">
+                <option value="all">Все задачи</option>
+                <option value="pending">В ожидании</option>
+                <option value="in-progress">В работе</option>
+                <option value="completed">Выполненные</option>
+            </select>
+            <select id="filterQuadrant">
+                <option value="all">Все квадранты</option>
+                <option value="1">Срочно и важно</option>
+                <option value="2">Важно, не срочно</option>
+                <option value="3">Срочно, не важно</option>
+                <option value="4">Не срочно и не важно</option>
+            </select>
+            <select id="sortBy">
+                <option value="newest">Сначала новые</option>
+                <option value="oldest">Сначала старые</option>
+                <option value="date">По дате</option>
+                <option value="importance">По важности</option>
+                <option value="urgency">По срочности</option>
+                <option value="name">По названию</option>
+            </select>
+        </div>
+
+        <div class="list-container" id="listContainer">
+            <div class="task-list" id="taskList"></div>
+        </div>
+
+        <div class="matrix-container" id="matrixContainer">
+            <div class="matrix-axes">
+                <span class="axis-label axis-urgency">⬅ Срочно</span>
+                <span class="axis-label axis-importance">Важно</span>
+                <span class="axis-label axis-urgency">Не срочно</span>
+            </div>
+            
+            <div class="matrix-grid">
+                <div class="matrix-quadrant quadrant-1">
+                    <div class="quadrant-header">
+                        <div class="quadrant-header-left">
+                            <span class="quadrant-icon"></span>
+                            <div>
+                                <div class="quadrant-title">Срочно и Важно</div>
+                                <div class="quadrant-desc">Сделать прямо сейчас! Это приоритетные задачи с дедлайном.</div>
+                            </div>
+                        </div>
+                        <div class="quadrant-stats">
+                            <div class="quadrant-stat">
+                                <div class="quadrant-stat-number" id="q1Count">0</div>
+                                <div class="quadrant-stat-label">Задач</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quadrant-tasks" id="quadrant1Tasks"></div>
+                </div>
+
+                <div class="matrix-quadrant quadrant-2">
+                    <div class="quadrant-header">
+                        <div class="quadrant-header-left">
+                            <span class="quadrant-icon"></span>
+                            <div>
+                                <div class="quadrant-title">Важно, не срочно</div>
+                                <div class="quadrant-desc">Запланировать на будущее. Стратегические задачи и развитие.</div>
+                            </div>
+                        </div>
+                        <div class="quadrant-stats">
+                            <div class="quadrant-stat">
+                                <div class="quadrant-stat-number" id="q2Count">0</div>
+                                <div class="quadrant-stat-label">Задач</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quadrant-tasks" id="quadrant2Tasks"></div>
+                </div>
+
+                <div class="matrix-quadrant quadrant-3">
+                    <div class="quadrant-header">
+                        <div class="quadrant-header-left">
+                            <span class="quadrant-icon"></span>
+                            <div>
+                                <div class="quadrant-title">Срочно, не важно</div>
+                                <div class="quadrant-desc">Делегировать или минимизировать. Чужие приоритеты.</div>
+                            </div>
+                        </div>
+                        <div class="quadrant-stats">
+                            <div class="quadrant-stat">
+                                <div class="quadrant-stat-number" id="q3Count">0</div>
+                                <div class="quadrant-stat-label">Задач</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quadrant-tasks" id="quadrant3Tasks"></div>
+                </div>
+
+                <div class="matrix-quadrant quadrant-4">
+                    <div class="quadrant-header">
+                        <div class="quadrant-header-left">
+                            <span class="quadrant-icon"></span>
+                            <div>
+                                <div class="quadrant-title">Не срочно и не важно</div>
+                                <div class="quadrant-desc">Удалить или отложить. Поглотители времени.</div>
+                            </div>
+                        </div>
+                        <div class="quadrant-stats">
+                            <div class="quadrant-stat">
+                                <div class="quadrant-stat-number" id="q4Count">0</div>
+                                <div class="quadrant-stat-label">Задач</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quadrant-tasks" id="quadrant4Tasks"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
