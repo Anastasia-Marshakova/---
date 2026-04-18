@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  /* тёмно-синий градиент */
+  background: linear-gradient(135deg, #000b18, #00172d, #00264d);
+  color: #f0f4ff;
+}
+
+/* доска */
+#tic-tac-toe-board {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);           /* подложка под клетки */
+  box-shadow: 0 0 25px rgba(0, 150, 255, 0.5); /* лёгкое свечение поля */
+}
+
+/* клетки */
+.cell {
+  width: 80px;
+  height: 80px;
+  background: rgba(10, 30, 80, 0.9);             /* тёмная плитка */
+  border-radius: 10px;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  box-shadow:
+    0 0 10px rgba(0, 200, 255, 0.3),             /* внешнее свечение */
+    inset 0 0 8px rgba(0, 0, 0, 0.6);            /* лёгкая глубина */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #e8f7ff;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+}
+
+.cell:hover {
+  background: rgba(20, 60, 120, 1);
+  box-shadow:
+    0 0 16px rgba(0, 230, 255, 0.7),
+    inset 0 0 4px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+}
+
+/*Сообщение*/
+.game-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #e0ecff;
+}
+
+/*кнопка сброса*/
+#resetButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #00172d;
+  background-color: #00d4ff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+}
+
+#resetButton:hover {
+  background-color: #27b0ff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.9);
+}
