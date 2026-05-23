@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио — Настя</title>
+    
+    <!--  ВСТРОЕННЫЕ СТИЛИ  -->
+    <style>
+        * Базовые настройки */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Шапка */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #e8f4f8;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #006989;
+    padding: 0.5rem 1rem;
+}
+
+.header-accent {
+    height: 3px;
+    background: #b3d9e8;
+}
+
+/* Секции */
+.section {
+    padding: 4rem 1rem;
+    min-height: 100vh;
+}
+
+.section-alt {
+    background: #e8f4f8;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #006989;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.section-title-main {
+    font-size: 2.5rem;
+    color: #006989;
+    margin-bottom: 1rem;
+}
+
+.section-lead {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background: #006989;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Обо мне */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.skills-list {
+    list-style: none;
+}
+
+.skills-list li {
+    padding: 0.3rem 0;
+}
+
+/* Портфолио */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+.project-title {
+    color: #006989;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.project-desc {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #e8f4f8;
+    color: #006989;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Контакты */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.contact-icon {
+    font-size: 1.3rem;
+}
+
+/* Подвал */
+.footer {
+    background: #006989;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .section {
+        padding: 2.5rem 1rem;
+        min-height: auto;
+    }
+    
+    .section-title-main {
+        font-size: 2rem;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#about" class="nav-link">Обо мне</a></li>
+                    <li><a href="#portfolio" class="nav-link">Портфолио</a></li>
+                    <li><a href="#contact" class="nav-link">Контакты</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="header-accent"></div>
+    </header>
+
+    <!-- Главная -->
+    <section id="home" class="section">
+        <div class="container text-center">
+            <!-- Мое имя -->
+            <h1 class="section-title-main">Привет, я Анастасия! </h1>
+            <p class="section-lead">
+                Я создаю современные веб-сайты и приложения. 
+                Добро пожаловать на мой личный сайт-портфолио.
+            </p>
+            <a href="#portfolio" class="btn">Смотреть работы</a>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <!-- Ссылка на изображение -->
+                    <img src="https://img.freepik.com/free-photo/attractive-positive-elegant-young-woman-cafe_23-2148071691.jpg?semt=ais_related_payload_trends&w=740&q=80" 
+                         alt="Фото профиля Настасья" 
+                         class="profile-img">
+                </div>
+                <div class="about-text">
+                    <p class="lead">Добро пожаловать на мой сайт-портфолио!</p>
+                    <p>
+                        Я студентка, увлечённая веб-разработкой. 
+                        Люблю создавать красивые и функциональные сайты, 
+                        изучать новые технологии и решать интересные задачи.
+                    </p>
+                    <h5 style="color:#006989; margin:1.5rem 0 0.5rem;">Мои навыки:</h5>
+                    <ul class="skills-list">
+                        <li> HTML5 & CSS3</li>
+                        <li> JavaScript</li>
+                        <li> Адаптивная вёрстка</li>
+                        <li> Git & GitHub</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+            <div class="portfolio-grid">
+                <article class="project-card">
+                    <h3 class="project-title">Проект 1</h3>
+                    <p class="project-desc">Описание первого проекта. Технологии: HTML, CSS.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <h3 class="project-title">Проект 2</h3>
+                    <p class="project-desc">Описание второго проекта. Технологии: JavaScript, адаптивность.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <h3 class="project-title">Проект 3</h3>
+                    <p class="project-desc">Описание третьего проекта. Технологии: React, Node.js.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <p class="text-center" style="margin-bottom:2rem; color:#666;">
+                Свяжитесь со мной любым удобным способом:
+            </p>
+            <div class="contact-grid">
+                <a href="mailto:example@mail.com" class="contact-card">
+                    <span class="contact-icon"></span>
+                    <span class="contact-text">example@mail.com</span>
+                </a>
+                <a href="tel:+79990000000" class="contact-card">
+                    <span class="contact-icon"></span>
+                    <span class="contact-text">+7 (999) 000-00-00</span>
+                </a>
+                <a href="https://t.me/username" target="_blank" class="contact-card">
+                    <span class="contact-icon"></span>
+                    <span class="contact-text">Telegram</span>
+                </a>
+            </div>
+            
+            <!-- cСЫЛКА НА ВНЕШНИЙ ИНФОРМАЦИОННЫЙ РЕСУРС -->
+            <div class="text-center" style="margin-top:3rem;">
+                <p style="margin-bottom:1rem; color:#666;">Полезные ресурсы:</p>
+                <a href="https://developer.mozilla.org/ru/" target="_blank" 
+                   class="btn" style="background:#d4edf4; color:#006989;">
+                     MDN Web Docs — документация по веб-технологиям
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <p>&copy; 2026 Настасья. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>
